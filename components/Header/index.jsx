@@ -1,6 +1,5 @@
 import { BiMoon, BiMenu, BiSun } from 'react-icons/bi'
 import { useState, useEffect, useRef } from 'react'
-import {setColor, toggleNav, toggleTheme} from '@/utils'
 import { useRouter } from 'next/router'
 import { Container } from '@/layouts'
 import Navbar from '@/components/Navbar'
@@ -10,6 +9,40 @@ export default function Header() {
   const navRef = useRef()
   const [isDark, setIsDark] = useState(true)
   const { query } = useRouter()
+
+  // to get the navbar in a smaller screen
+  // the parameter represent a ref hook of navbar
+   const toggleNav = () => {
+    navRef.current.classList.toggle('-top-52')
+    navRef.current.classList.toggle('top-14')
+    navRef.current.classList.toggle('sm:top-20')
+    setTimeout(() => {
+      navRef.current.classList.toggle('opacity-0')
+      navRef.current.classList.toggle('opacity-100')
+    }, 10)
+  }
+
+  // this is just toggling between dark mode and light, adding class 'light' or 'dark' to the html element
+   const setColor = () => {
+    const htmlClassName = localStorage.getItem('NJP_ColorTheme')
+    const html = document.documentElement
+    if (htmlClassName) html.className = htmlClassName
+  }
+
+  // this is the reference for toggling between dark mode and light, adding class 'light' or 'dark' to the html element
+  // isDark is the state hook, and setIsDark is the dispatch action from useState hook,
+   const toggleTheme = () => {
+    setIsDark(!isDark)
+    if (isDark) {
+      localStorage.removeItem('NJP_ColorTheme')
+      localStorage.setItem('NJP_ColorTheme', 'dark')
+      setColor()
+    } else {
+      localStorage.removeItem('NJP_ColorTheme')
+      localStorage.setItem('NJP_ColorTheme', 'ligth')
+      setColor()
+    }
+  }
 
   // check of what we get from localstorage
   // this used to prevent double click to swicth between dark mode
@@ -34,9 +67,9 @@ export default function Header() {
       <Container navContainer>
         <Navbar refHook={navRef} query={query} />
         <Container btnWrapper>
-          <BtnToggler onEvent={() => toggleTheme(isDark, setIsDark)}>{isDark ? <BiMoon /> : <BiSun />}</BtnToggler>
+          <BtnToggler onEvent={toggleTheme}>{isDark ? <BiMoon /> : <BiSun />}</BtnToggler>
           {query.id ? null : (
-            <BtnToggler classes='lg:hidden' onEvent={() => toggleNav(navRef)}>
+            <BtnToggler classes='lg:hidden' onEvent={toggleNav}>
               <BiMenu />
             </BtnToggler>
           )}
