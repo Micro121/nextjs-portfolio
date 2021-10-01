@@ -62,4 +62,4 @@ npm run build
 
 #### License
 
-This project is under MIT license, see the license [here](https://)
+This project is under MIT license, see the license [here](https://github.com/rizkimcitra/nextjs-portfolio/blob/main/LICENSE)
