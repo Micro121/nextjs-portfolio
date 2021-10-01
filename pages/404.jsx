@@ -1,6 +1,6 @@
-import { Paragraph } from '@/components/Typography'
 import { BiArrowBack } from 'react-icons/bi'
 import { useEffect } from 'react'
+import Typo from '@/components/Typography'
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -100,10 +100,10 @@ export default function NotFound() {
               <span className='pb-2 sm:pb-4 lg:pb-0 lg:pr-4 text-center'>404</span>
               <span className='pt-2 sm:pt-4 lg:pt-0 lg:pl-4 text-center'>Page Not Found.</span>
             </div>
-            <Paragraph leading marginBottom='mb-2 sm:mb-4 text-center lg:w-9/12 mx-auto'>
+            <Typo Paragraph relaxed marginBot>
               The page you are looking for is not found, you might get lost, because currrently there are nothing to display on your requested page,
               sorry.
-            </Paragraph>
+            </Typo>
             <Link href='/'>
               <a className='group inline-flex items-center justify-center text-sm sm:text-base space-x-1 sm:space-x-2 text-blue-500 dark:text-pink-500'>
                 <span className='group-hover:-translate-x-1'>
