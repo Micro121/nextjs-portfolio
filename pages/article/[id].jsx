@@ -44,7 +44,7 @@ export default function Article({ articleData: { shortDesc, title, imageSrc, ima
       <Layout>
         <Header />
         <Container main article>
-          <Button backBtn />x
+          <Button backBtn />
           <section className='py-2 sm:py-4 lg:py-12'>
             <figure className='select-none'>
               <Image
